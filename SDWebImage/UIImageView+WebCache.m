@@ -61,8 +61,15 @@ static char operationArrayKey;
                 if (!wself) return;
                 if (image)
                 {
-                    wself.image = image;
+                    [UIView transitionWithView:self
+                                      duration:0.33f
+                                       options:UIViewAnimationOptionTransitionCrossDissolve
+                                    animations:^{
+                                        wself.image = image;
+                                    } completion:nil];
+                    
                     [wself setNeedsLayout];
+
                 }
                 if (completedBlock && finished)
                 {
