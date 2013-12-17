@@ -176,6 +176,19 @@
 }
 
 #pragma mark NSURLConnection (delegate)
+static NSURLCredential* sCurrentCreds = nil;
++ (void)setCredential:(NSURLCredential*)creds {
+    sCurrentCreds = creds;
+}
+
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    if (![[challenge protectionSpace] realm]) {
+        [challenge.sender performDefaultHandlingForAuthenticationChallenge:challenge];
+    } else if ([challenge previousFailureCount] < 1) {
+        [challenge.sender useCredential:sCurrentCreds forAuthenticationChallenge:challenge];
+    }
+}
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {

@@ -21,4 +21,6 @@
             completed:(SDWebImageDownloaderCompletedBlock)completedBlock
             cancelled:(void (^)())cancelBlock;
 
++ (void)setCredential:(NSURLCredential*)creds;
+
 @end
