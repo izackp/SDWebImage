@@ -471,13 +471,12 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
 
 - (int)getDiskCount
 {
-    int count = 0;
-    NSDirectoryEnumerator *fileEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:self.diskCachePath];
-    for (NSString *fileName in fileEnumerator)
-    {
-        count += 1;
-    }
     
+    NSFileManager * filemgr = [NSFileManager defaultManager];
+    NSError* error;
+    NSArray * filelist = [filemgr contentsOfDirectoryAtPath:self.diskCachePath error:&error];
+    int count = (int)[filelist count];
+
     return count;
 }
 
