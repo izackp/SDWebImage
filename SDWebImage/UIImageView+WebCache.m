@@ -70,8 +70,10 @@ static char TAG_ACTIVITY_SHOW;
                     return;
                 }
                 else if (image) {
-                    wself.image = image;
-                    [wself setNeedsLayout];
+                    [UIView transitionWithView:self duration:0.3f options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                        wself.image = image;
+                        [wself setNeedsLayout];
+                    } completion:nil];
                 } else {
                     if ((options & SDWebImageDelayPlaceholder)) {
                         wself.image = placeholder;
