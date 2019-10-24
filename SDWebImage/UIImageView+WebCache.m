@@ -166,11 +166,11 @@ static char TAG_ACTIVITY_SHOW;
 }
 
 - (void)setIndicatorStyle:(UIActivityIndicatorViewStyle)style{
-    objc_setAssociatedObject(self, &TAG_ACTIVITY_STYLE, [NSNumber numberWithInt:style], OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, &TAG_ACTIVITY_STYLE, [NSNumber numberWithInteger:(NSInteger)style], OBJC_ASSOCIATION_RETAIN);
 }
 
-- (int)getIndicatorStyle{
-    return [objc_getAssociatedObject(self, &TAG_ACTIVITY_STYLE) intValue];
+- (NSInteger)getIndicatorStyle{
+    return [objc_getAssociatedObject(self, &TAG_ACTIVITY_STYLE) integerValue];
 }
 
 - (void)addActivityIndicator {
